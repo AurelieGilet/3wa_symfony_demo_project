@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/home/home.css') }}">
+{% endblock %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block body %}
+<main class="home">
+    <h1>Nos restaurants</h1>
+    <div class="home__restaurants">
+        {% for restaurant in restaurants %}
+        <a href="{{ path('restaurant_details', {'id': restaurant.id}) }}"
+            class="home__restaurant-name"        
+        >
+            {{ restaurant.name }}
+        </a>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/restaurant/restaurant.css') }}">
+{% endblock %}
+
+{% block title %}{{ restaurant.name }}{% endblock %}
+
+{% block body %}
+<main class="restaurant">
+    <a href="{{ path('homepage') }}" class="link-back">Retour à l'accueil</a>
+    <div class="restaurant__title">
+        <h1>Bienvenue à {{ restaurant.name }} !</h1>
+        <p>Dirigé par {{ restaurant.director }}</p>
+    </div>
+
+    <div class="restaurant__address">
+        <p>Nous somme situés au :</p>
+        <p>{{restaurant.address.street }}</p>
+        <p>{{restaurant.address.zip}} {{restaurant.address.city}}</p>
+    </div>
+
+    <section class="restaurant__menu">
+        <h2>Notre menu</h2>
+        <div>
+            <h3>A la carte :</h3>
+            <table class="menu-table">
+                <thead>
+                    <tr>
+                    <th>Intitulé</th>
+                    <th>Ingrédients</th>
+                    <th>Prix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dish in restaurant.dishes %}
+                    <tr>
+                        <td>{{ dish.name }}</td>
+                        <td>
+                            {% for ingredient in dish.ingredients %}
+                                {{ ingredient.name }}
+                            {% endfor %}
+                        </td>
+                        <td>{{ dish.price }} €</td>
+                    </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+
+            <h3>En menu :</h3>
+            <table class="menu-table">
+                <thead>
+                    <tr>
+                        <th>Intitulé</th>
+                        <th>Plats</th>
+                        <th>Prix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for menu in restaurant.menus %}
+                    <tr>
+                        <td>{{ menu.name }}</td>
+                        <td>
+                            {% for dish in menu.dishes %}
+                                {{ dish.name }}
+                            {% endfor %}
+                        </td>
+                        <td>{{ menu.price }} €</td>
+                    </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+{% endblock %}

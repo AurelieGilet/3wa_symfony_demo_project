@@ -1,0 +1,47 @@
+.restaurant {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+}
+
+.restaurant__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.restaurant__title p {
+    font-size: 20px;
+}
+
+.restaurant__menu h2 {
+    text-align: center;
+}
+
+table.menu-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid white;
+}
+
+table.menu-table thead th:first-child {
+    width: 30%;
+}
+
+table.menu-table thead th:nth-child(2) {
+    width: 50%;
+}
+
+table.menu-table thead th:last-child {
+    width: 20%;
+}
+
+table.menu-table td, table.menu-table th {
+border: 2px solid white;
+padding: 3px;
+}
+
+table.menu-table thead {
+background-color: #ebebea;
+}

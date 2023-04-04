@@ -23,9 +23,9 @@ class Dish
 
     #[ORM\ManyToOne(inversedBy: 'dishes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?restaurant $restaurant = null;
+    private ?Restaurant $restaurant = null;
 
-    #[ORM\ManyToMany(targetEntity: ingredient::class, inversedBy: 'dishes')]
+    #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'dishes')]
     private Collection $ingredients;
 
     #[ORM\ManyToMany(targetEntity: Menu::class, mappedBy: 'dishes')]
@@ -66,12 +66,12 @@ class Dish
         return $this;
     }
 
-    public function getRestaurant(): ?restaurant
+    public function getRestaurant(): ?Restaurant
     {
         return $this->restaurant;
     }
 
-    public function setRestaurant(?restaurant $restaurant): self
+    public function setRestaurant(?Restaurant $restaurant): self
     {
         $this->restaurant = $restaurant;
 
@@ -86,7 +86,7 @@ class Dish
         return $this->ingredients;
     }
 
-    public function addIngredient(ingredient $ingredient): self
+    public function addIngredient(Ingredient $ingredient): self
     {
         if (!$this->ingredients->contains($ingredient)) {
             $this->ingredients->add($ingredient);
@@ -95,7 +95,7 @@ class Dish
         return $this;
     }
 
-    public function removeIngredient(ingredient $ingredient): self
+    public function removeIngredient(Ingredient $ingredient): self
     {
         $this->ingredients->removeElement($ingredient);
 

@@ -23,9 +23,9 @@ class Menu
 
     #[ORM\ManyToOne(inversedBy: 'menus')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?restaurant $restaurant = null;
+    private ?Restaurant $restaurant = null;
 
-    #[ORM\ManyToMany(targetEntity: dish::class, inversedBy: 'menus')]
+    #[ORM\ManyToMany(targetEntity: Dish::class, inversedBy: 'menus')]
     private Collection $dishes;
 
     public function __construct()
@@ -62,12 +62,12 @@ class Menu
         return $this;
     }
 
-    public function getRestaurant(): ?restaurant
+    public function getRestaurant(): ?Restaurant
     {
         return $this->restaurant;
     }
 
-    public function setRestaurant(?restaurant $restaurant): self
+    public function setRestaurant(?Restaurant $restaurant): self
     {
         $this->restaurant = $restaurant;
 
@@ -75,14 +75,14 @@ class Menu
     }
 
     /**
-     * @return Collection<int, dish>
+     * @return Collection<int, Dish>
      */
     public function getDishes(): Collection
     {
         return $this->dishes;
     }
 
-    public function addDish(dish $dish): self
+    public function addDish(Dish $dish): self
     {
         if (!$this->dishes->contains($dish)) {
             $this->dishes->add($dish);
@@ -91,7 +91,7 @@ class Menu
         return $this;
     }
 
-    public function removeDish(dish $dish): self
+    public function removeDish(Dish $dish): self
     {
         $this->dishes->removeElement($dish);
 

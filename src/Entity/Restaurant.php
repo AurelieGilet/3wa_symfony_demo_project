@@ -23,7 +23,7 @@ class Restaurant
 
     #[ORM\OneToOne(inversedBy: 'restaurant', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?address $address = null;
+    private ?Address $address = null;
 
     #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Dish::class)]
     private Collection $dishes;
@@ -66,12 +66,12 @@ class Restaurant
         return $this;
     }
 
-    public function getAddress(): ?address
+    public function getAddress(): ?Address
     {
         return $this->address;
     }
 
-    public function setAddress(address $address): self
+    public function setAddress(Address $address): self
     {
         $this->address = $address;
 
