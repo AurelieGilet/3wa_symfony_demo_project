@@ -9,6 +9,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+    /**
+     * @param RestaurantRepository $restaurantRepository
+     * @return Response
+     */
     #[Route('/', name: 'homepage')]
     public function index(RestaurantRepository $restaurantRepository): Response
     {

@@ -21,14 +21,14 @@ class Restaurant
     #[ORM\Column(length: 255)]
     private ?string $director = null;
 
-    #[ORM\OneToOne(inversedBy: 'restaurant', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Address $address = null;
 
-    #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Dish::class)]
+    #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Dish::class, orphanRemoval: true)]
     private Collection $dishes;
 
-    #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Menu::class)]
+    #[ORM\OneToMany(mappedBy: 'restaurant', targetEntity: Menu::class, orphanRemoval: true)]
     private Collection $menus;
 
     public function __construct()

@@ -14,30 +14,27 @@ class Address
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $city = null;
+    private ?string $street = null;
 
     #[ORM\Column(length: 255)]
     private ?string $zip = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $street = null;
-
-    #[ORM\OneToOne(mappedBy: 'address', cascade: ['persist', 'remove'])]
-    private ?Restaurant $restaurant = null;
+    private ?string $city = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCity(): ?string
+    public function getStreet(): ?string
     {
-        return $this->city;
+        return $this->street;
     }
 
-    public function setCity(string $city): self
+    public function setStreet(string $street): self
     {
-        $this->city = $city;
+        $this->street = $street;
 
         return $this;
     }
@@ -54,31 +51,14 @@ class Address
         return $this;
     }
 
-    public function getStreet(): ?string
+    public function getCity(): ?string
     {
-        return $this->street;
+        return $this->city;
     }
 
-    public function setStreet(string $street): self
+    public function setCity(string $city): self
     {
-        $this->street = $street;
-
-        return $this;
-    }
-
-    public function getRestaurant(): ?Restaurant
-    {
-        return $this->restaurant;
-    }
-
-    public function setRestaurant(Restaurant $restaurant): self
-    {
-        // set the owning side of the relation if necessary
-        if ($restaurant->getAddress() !== $this) {
-            $restaurant->setAddress($this);
-        }
-
-        $this->restaurant = $restaurant;
+        $this->city = $city;
 
         return $this;
     }

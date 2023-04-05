@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">
+{% endblock %}
+
+{% block title %}Espace Admin{% endblock %}
+
+{% block body %}
+<main class="admin">
+    <a href="{{ path('homepage') }}" class="link-back">Retour à l'accueil</a>
+
+    <h1>Espace de gestion</h1>
+
+    {% for label, messages in app.flashes(["error", "success"]) %}
+        {% for message in messages %}
+            <span class="flash-content {{label}}-content">
+                {{message}}
+            </span>
+        {% endfor %}
+    {% endfor %}
+
+    <section>
+        <h2>Les Restaurants</h2>
+        <a href="{{ path('restaurant_add') }}" class="link-add">Ajouter un restaurant</a>
+        <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Directeur</th>
+                        <th>Adresse</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for restaurant in restaurants %}
+                    <tr>
+                        <td>{{ restaurant.name }}</td>
+                        <td>{{ restaurant.director }}</td>
+                        <td>
+                            {{ restaurant.address.street }}
+                            {{ restaurant.address.zip }} {{ restaurant.address.city }}
+                        </td>
+                        <td><a href="{{ path('restaurant_update', {'id': restaurant.id}) }}" class="link-update">Modifier</a></td>
+                        <td><a href="{{ path('restaurant_delete', {'id': restaurant.id}) }}" class="link-delete">Supprimer</a></td>
+                    </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+    </section>
+    <section>
+        <h2>Les Menus</h2>
+        <a href="{{ path('menu_add') }}" class="link-add">Ajouter un menu</a>
+        <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Restaurant</th>
+                        <th>Plats</th>
+                        <th>Prix</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for menu in menus %}
+                    <tr>
+                        <td>{{ menu.name }}</td>
+                        <td>{{ menu.restaurant.name }}</td>
+                        <td>
+                            {% for dish in menu.dishes %}
+                                {{ dish.name }} 
+                            {% endfor %}
+                        </td>
+                        <td>{{ menu.price }} €</td>
+                        <td><a href="{{ path('menu_update', {'id': menu.id}) }}" class="link-update">Modifier</a></td>
+                        <td><a href="{{ path('menu_delete', {'id': menu.id}) }}" class="link-delete">Supprimer</a></td>
+                    </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+    </section>
+    <section>
+        <h2>Les Plats</h2>
+        <a href="{{ path('dish_add') }}" class="link-add">Ajouter un plat</a>
+        <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Restaurant</th>
+                        <th>Ingrédients</th>
+                        <th>Prix</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dish in dishes %}
+                    <tr>
+                        <td>{{ dish.name }}</td>
+                        <td>{{ dish.restaurant.name }}</td>
+                        <td>
+                            {% for ingredient in dish.ingredients %}
+                                {{ ingredient.name }} 
+                            {% endfor %}
+                        </td>
+                        <td>{{ dish.price }} €</td>
+                        <td><a href="{{ path('dish_update', {'id': dish.id}) }}" class="link-update">Modifier</a></td>
+                        <td><a href="{{ path('dish_delete', {'id': dish.id}) }}" class="link-delete">Supprimer</a></td>
+                    </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+    </section>
+    <section>
+        <h2>Les Ingrédients</h2>
+        <a href="{{ path('ingredient_add') }}" class="link-add">Ajouter un ingrédient</a>
+        <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Plats qui l'utilisent</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ingredient in ingredients %}
+                    <tr>
+                        <td>{{ ingredient.name }}</td>
+                        <td>
+                            {% for dish in ingredient.dishes %}
+                                {{ dish.name }} 
+                            {% endfor %}
+                        </td>
+                        <td><a href="{{ path('ingredient_update', {'id': ingredient.id}) }}" class="link-update">Modifier</a></td>
+                        <td><a href="{{ path('ingredient_delete', {'id': ingredient.id}) }}" class="link-delete">Supprimer</a></td>
+                    </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+    </section>
+</main>
+{% endblock %}
