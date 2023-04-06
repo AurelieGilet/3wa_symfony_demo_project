@@ -1,0 +1,19 @@
+{% set route_name = app.request.attributes.get('_route') %}
+
+<header>
+    <nav>
+        {% if is_granted("ROLE_USER") %}
+            <a href="{{ path('admin') }}" class="link-back">Espace admin</a>
+        {% endif %}
+    </nav>
+    <nav>
+        <ul>
+            <li><a href="{{ path('register') }}">Inscription</a></li>
+            {% if is_granted("ROLE_USER") %}
+                <li><a href="{{ path('logout') }}">Déconnexion</a></li>
+            {% else %}
+                <li><a href="{{ path('login') }}">Connexion</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>     

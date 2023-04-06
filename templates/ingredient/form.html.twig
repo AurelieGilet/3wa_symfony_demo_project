@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin/form.css') }}">
 {% endblock %}
 
@@ -17,8 +16,7 @@
 {% endblock %}
 
 {% block body %}
-<main class="admin">
-    <a href="{{ path('admin') }}" class="link-back">Espace admin</a>
+<main>
     <h1>
         {% if current_path is same as 'ingredient_add' %}
             Ajouter 
